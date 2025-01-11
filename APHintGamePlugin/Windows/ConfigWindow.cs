@@ -7,9 +7,9 @@ namespace APHintGamePlugin.Windows;
 
 public class ConfigWindow : Window, IDisposable
 {
-    private Configuration configuration;
+    private readonly Configuration configuration;
 
-    private APHintGame apHintGame;
+    private readonly APHintGame apHintGame;
 
     private string result = string.Empty;
 
@@ -26,7 +26,9 @@ public class ConfigWindow : Window, IDisposable
         apHintGame = plugin.APHintGame;
     }
 
-    public void Dispose() { }
+    public void Dispose() {
+        GC.SuppressFinalize(this);
+    }
 
     public override void Draw()
     {
