@@ -9,6 +9,7 @@ using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
 using Archipelago.MultiClient.Net.Packets;
 using Dalamud.Game.Text;
+using System;
 
 namespace APHintGamePlugin;
 
@@ -71,8 +72,14 @@ public sealed class Plugin : IDalamudPlugin
 
     private void OnHint(object? sender, ushort number)
     {
-        Log.Information("Duty completed; hinting...");
-        APHintGame.Hint();
+        Log.Information("Sending hint...");
+        try
+        {
+            APHintGame.Hint();
+        } catch (Exception exc)
+        {
+            Log.Error($"Error hinting: {exc}");
+        }
     }
 
     private void DrawUI() => WindowSystem.Draw();

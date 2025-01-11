@@ -59,7 +59,14 @@ public class ConfigWindow : Window, IDisposable
         if (ImGui.Button("Connect"))
         {
             Configuration.Save();
-            result = apHintGame.Connect(Configuration.ServerURL, Configuration.SlotName, Configuration.Password);
+            try
+            {
+                apHintGame.Connect(Configuration.ServerURL, Configuration.SlotName, Configuration.Password);
+                result = "Connected!";
+            } catch (Exception exc)
+            {
+                result = "Failed to connect to Archipelago: " + exc.Message;
+            }
         }
         ImGui.TextUnformatted(result);
     }

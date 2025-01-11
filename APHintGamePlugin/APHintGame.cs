@@ -18,22 +18,19 @@ public class APHintGame
 
     private Random random = new Random();
 
-    public string Connect(string url, string slot, string password) // TODO handle connection fail/success more elegantly...
+    public void Connect(string url, string slot, string password)
     {
         APSession = ArchipelagoSessionFactory.CreateSession(url);
         var loginResult = APSession.TryConnectAndLogin("", slot, ItemsHandlingFlags.NoItems, null, ["HintGame"]);
         if (!loginResult.Successful)
         {
             var failure = (LoginFailure)loginResult;
-            var errorMsg = "Failed to connect to Archipelago:";
+            var errorMsg = "";
             foreach (string failmsg in failure.Errors)
             {
-                errorMsg += " " + failmsg;
+                errorMsg += failmsg + " ";
             }
-            return errorMsg;
-        } else
-        {
-            return "Connection successful.";
+            throw new Exception(errorMsg);
         }
     }
 
