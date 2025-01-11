@@ -1,12 +1,13 @@
 {
-  "Author": "bclindner",
-  "Name": "Archipelago Hintgame Client",
-  "Punchline": "Archipelago Multiworld hintgame client",
-  "Description": "Plugin allowing you to use XIV duty completions for Archipelago multiworld hints.",
-  "ApplicableVersion": "any",
-  "Tags": [
-    "archipelago",
-    "plugin",
-    "bclindner"
-  ]
+    "Author": "bclindner",
+    "Name": "Archipelago Hintgame Client",
+    "Punchline": "Archipelago Multiworld hintgame client",
+    "Description": "Plugin allowing you to use XIV duty completions for Archipelago multiworld hints.",
+    "ApplicableVersion": "any",
+    "Tags": [
+        "archipelago",
+        "plugin",
+        "bclindner"
+    ],
+    "IconUrl": "https://raw.githubusercontent.com/bclindner/APHintGamePlugin/master/Data/archipelago.png"
 }
