@@ -2,18 +2,11 @@
 <Project Sdk="Dalamud.NET.SDK/11.0.0">
   <PropertyGroup>
     <Version>0.0.0.1</Version>
-    <Description>A sample plugin.</Description>
-    <PackageProjectUrl>https://github.com/goatcorp/SamplePlugin</PackageProjectUrl>
+    <Description>Plugin allowing you to use XIV duty completions for Archipelago multiworld hints.</Description>
+    <PackageProjectUrl>https://github.com/bclindner/APHintGamePlugin</PackageProjectUrl>
     <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="..\Data\archipelago.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <Visible>false</Visible>
-    </Content>
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Archipelago.MultiClient.Net" Version="6.5.0" />
