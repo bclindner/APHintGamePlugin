@@ -70,6 +70,7 @@ public sealed class Plugin : IDalamudPlugin
         CommandManager.RemoveHandler(CommandName);
 
         DutyState.DutyCompleted -= OnHint;
+        APHintGame.OnMessageReceived -= OnReceiveAPMessage;
     }
 
     private void OnCommand(string command, string args)
@@ -93,7 +94,7 @@ public sealed class Plugin : IDalamudPlugin
     private void OnReceiveAPMessage(object? sender, LogMessage message)
     {
         var entry = new XivChatEntry();
-        entry.Message = message.ToString();
+        entry.Message = "[Archipelago] " + message.ToString();
         ChatGui.Print(entry);
     }
 
