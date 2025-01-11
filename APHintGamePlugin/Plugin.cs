@@ -52,7 +52,7 @@ public sealed class Plugin : IDalamudPlugin
 
         PluginInterface.UiBuilder.OpenConfigUi += ToggleConfigUI;
         PluginInterface.UiBuilder.OpenMainUi += ToggleConfigUI;
-
+        
         DutyState.DutyCompleted += OnHint;
     }
 
@@ -78,7 +78,7 @@ public sealed class Plugin : IDalamudPlugin
             APHintGame.Hint();
         } catch (Exception exc)
         {
-            Log.Error($"Error hinting: {exc}");
+            Log.Error($"Error sending hint: {exc}");
         }
     }
 
