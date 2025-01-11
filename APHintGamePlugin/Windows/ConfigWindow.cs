@@ -9,7 +9,7 @@ namespace APHintGamePlugin.Windows;
 
 public class ConfigWindow : Window, IDisposable
 {
-    private Configuration Configuration;
+    private Configuration configuration;
 
     private APHintGame apHintGame;
 
@@ -27,7 +27,7 @@ public class ConfigWindow : Window, IDisposable
             MaximumSize = new Vector2(float.MaxValue, float.MaxValue)
         };
 
-        Configuration = plugin.Configuration;
+        configuration = plugin.Configuration;
         apHintGame = plugin.APHintGame;
     }
 
@@ -35,33 +35,33 @@ public class ConfigWindow : Window, IDisposable
 
     public override void Draw()
     {
-        var serverUrlValue = Configuration.ServerURL;
+        var serverUrlValue = configuration.ServerURL;
         if (ImGui.InputText("Server URL", ref serverUrlValue, 2048))
         {
-            Configuration.ServerURL = serverUrlValue;
-            Configuration.Save();
+            configuration.ServerURL = serverUrlValue;
+            configuration.Save();
         }
 
-        var slotNameValue = Configuration.SlotName;
+        var slotNameValue = configuration.SlotName;
         if (ImGui.InputText("Slot", ref slotNameValue, 2048))
         {
-            Configuration.SlotName = slotNameValue;
-            Configuration.Save();
+            configuration.SlotName = slotNameValue;
+            configuration.Save();
         }
 
-        var passwordValue = Configuration.Password;
+        var passwordValue = configuration.Password;
         if (ImGui.InputText("Password", ref passwordValue, 2048))
         {
-            Configuration.Password = passwordValue;
-            Configuration.Save();
+            configuration.Password = passwordValue;
+            configuration.Save();
         }
 
         if (ImGui.Button("Connect"))
         {
-            Configuration.Save();
+            configuration.Save();
             try
             {
-                apHintGame.Connect(Configuration.ServerURL, Configuration.SlotName, Configuration.Password);
+                apHintGame.Connect(configuration.ServerURL, configuration.SlotName, configuration.Password);
                 result = "Connected!";
             } catch (Exception exc)
             {
