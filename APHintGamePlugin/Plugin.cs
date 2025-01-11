@@ -57,6 +57,8 @@ public sealed class Plugin : IDalamudPlugin
         ConfigWindow.Dispose();
 
         CommandManager.RemoveHandler(CommandName);
+
+        DutyState.DutyCompleted -= OnHint;
     }
 
     private void OnCommand(string command, string args)
