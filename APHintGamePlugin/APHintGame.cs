@@ -7,9 +7,8 @@ namespace APHintGamePlugin;
 public class APHintGame
 {
     public ArchipelagoSession? APSession { get; set; } = null;
-    private string[] Locations { get; set; } = [];
 
-    private Random random = new Random();
+    private readonly Random random = new();
 
     public void Connect(string url, string slot, string password)
     {
@@ -19,7 +18,7 @@ public class APHintGame
         {
             var failure = (LoginFailure)loginResult;
             var errorMsg = "";
-            foreach (string failmsg in failure.Errors)
+            foreach (var failmsg in failure.Errors)
             {
                 errorMsg += failmsg + " ";
             }

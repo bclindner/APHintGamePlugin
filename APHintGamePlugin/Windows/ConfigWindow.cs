@@ -11,7 +11,7 @@ public class ConfigWindow : Window, IDisposable
 
     private APHintGame apHintGame;
 
-    private string result = String.Empty;
+    private string result = string.Empty;
 
     public ConfigWindow(Plugin plugin) : base("APHintGamePlugin Config###APHintGamePlugin config")
     {

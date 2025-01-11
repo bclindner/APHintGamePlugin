@@ -10,9 +10,9 @@ public class Configuration : IPluginConfiguration
 
     public string ServerURL { get; set; } = "localhost:38281";
 
-    public string SlotName { get; set; } = String.Empty;
+    public string SlotName { get; set; } = string.Empty;
 
-    public string Password { get; set; } = String.Empty;
+    public string Password { get; set; } = string.Empty;
 
     public void Save()
     {
