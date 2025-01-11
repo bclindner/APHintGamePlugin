@@ -1,13 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
-using Archipelago.MultiClient.Net.Models;
-using Archipelago.MultiClient.Net.Packets;
 
 namespace APHintGamePlugin;
 
@@ -36,7 +29,8 @@ public class APHintGame
 
     public void Hint()
     {
-        if (APSession == null) {
+        if (APSession == null)
+        {
             throw new Exception("APSession not connected");
         }
         var locations = APSession.Locations.AllMissingLocations;

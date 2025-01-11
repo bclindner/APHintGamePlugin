@@ -1,7 +1,5 @@
 using System;
 using System.Numerics;
-using Archipelago.MultiClient.Net.Enums;
-using Archipelago.MultiClient.Net;
 using Dalamud.Interface.Windowing;
 using ImGuiNET;
 
@@ -63,7 +61,8 @@ public class ConfigWindow : Window, IDisposable
             {
                 apHintGame.Connect(configuration.ServerURL, configuration.SlotName, configuration.Password);
                 result = "Connected!";
-            } catch (Exception exc)
+            }
+            catch (Exception exc)
             {
                 result = "Failed to connect to Archipelago: " + exc.Message;
             }

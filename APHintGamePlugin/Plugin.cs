@@ -1,15 +1,10 @@
+using System;
+using APHintGamePlugin.Windows;
 using Dalamud.Game.Command;
+using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
 using Dalamud.Plugin;
-using System.IO;
-using Dalamud.Interface.Windowing;
 using Dalamud.Plugin.Services;
-using APHintGamePlugin.Windows;
-using Archipelago.MultiClient.Net;
-using Archipelago.MultiClient.Net.Enums;
-using Archipelago.MultiClient.Net.Packets;
-using Dalamud.Game.Text;
-using System;
 
 namespace APHintGamePlugin;
 
@@ -22,7 +17,6 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] internal static IDataManager DataManager { get; private set; } = null!;
     [PluginService] internal static IPluginLog Log { get; private set; } = null!;
     [PluginService] internal static IDutyState DutyState { get; private set; } = null!;
-
     [PluginService] internal static IChatGui ChatGui { get; private set; } = null!;
 
     private const string CommandName = "/aphintgame";
@@ -52,7 +46,7 @@ public sealed class Plugin : IDalamudPlugin
 
         PluginInterface.UiBuilder.OpenConfigUi += ToggleConfigUI;
         PluginInterface.UiBuilder.OpenMainUi += ToggleConfigUI;
-        
+
         DutyState.DutyCompleted += OnHint;
     }
 
@@ -76,7 +70,8 @@ public sealed class Plugin : IDalamudPlugin
         try
         {
             APHintGame.Hint();
-        } catch (Exception exc)
+        }
+        catch (Exception exc)
         {
             Log.Error($"Error sending hint: {exc}");
         }
