@@ -1,6 +1,8 @@
 using System;
 using APHintGamePlugin.Windows;
+using Archipelago.MultiClient.Net.MessageLog.Messages;
 using Dalamud.Game.Command;
+using Dalamud.Game.Text;
 using Dalamud.Interface.Windowing;
 using Dalamud.IoC;
 using Dalamud.Plugin;
@@ -19,7 +21,8 @@ public sealed class Plugin : IDalamudPlugin
     [PluginService] internal static IDutyState DutyState { get; private set; } = null!;
     [PluginService] internal static IChatGui ChatGui { get; private set; } = null!;
 
-    private const string CommandName = "/aphintgame";
+    private const string CommandName = "/aphg";
+    private const string ChatCommandName = "/aphgchat";
 
     public Configuration Configuration { get; init; }
 
@@ -42,12 +45,20 @@ public sealed class Plugin : IDalamudPlugin
             HelpMessage = "Launch the APHintGamePlugin config window."
         });
 
+        CommandManager.AddHandler(ChatCommandName, new CommandInfo(OnSendAPMessage)
+        {
+            HelpMessage = "Send a message to the Archipelago chat."
+        });
+
         PluginInterface.UiBuilder.Draw += DrawUI;
 
         PluginInterface.UiBuilder.OpenConfigUi += ToggleConfigUI;
         PluginInterface.UiBuilder.OpenMainUi += ToggleConfigUI;
 
         DutyState.DutyCompleted += OnHint;
+
+        APHintGame.OnMessageReceived += OnReceiveAPMessage;
+
     }
 
     public void Dispose()
@@ -77,6 +88,18 @@ public sealed class Plugin : IDalamudPlugin
         {
             Log.Error($"Error sending hint: {exc}");
         }
+    }
+
+    private void OnReceiveAPMessage(object? sender, LogMessage message)
+    {
+        var entry = new XivChatEntry();
+        entry.Message = message.ToString();
+        ChatGui.Print(entry);
+    }
+
+    private void OnSendAPMessage(object? sender, string args)
+    {
+        APHintGame.SendAPMessage(args);
     }
 
     private void DrawUI() => WindowSystem.Draw();

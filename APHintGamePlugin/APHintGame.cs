@@ -1,6 +1,9 @@
 using System;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
+using Archipelago.MultiClient.Net.MessageLog.Messages;
+using Lumina.Excel.Sheets;
+using LogMessage = Archipelago.MultiClient.Net.MessageLog.Messages.LogMessage;
 
 namespace APHintGamePlugin;
 
@@ -22,7 +25,11 @@ public class APHintGame
             {
                 errorMsg += failmsg + " ";
             }
+            APSession = null;
             throw new Exception(errorMsg);
+        } else
+        {
+            APSession.MessageLog.OnMessageReceived += HandleAPMessage;
         }
     }
 
@@ -37,4 +44,20 @@ public class APHintGame
         var locationId = locations[random.Next() % locationCount];
         APSession.Locations.ScoutLocationsAsync(HintCreationPolicy.CreateAndAnnounce, locationId);
     }
+
+    private void HandleAPMessage(LogMessage message)
+    {
+        OnMessageReceived?.Invoke(this, message);
+    }
+
+    public void SendAPMessage(string message)
+    {
+        if (APSession == null)
+        {
+            throw new Exception("APSession not connected");
+        }
+        APSession.Say(message);
+    }
+
+    public event EventHandler<LogMessage>? OnMessageReceived;
 }
