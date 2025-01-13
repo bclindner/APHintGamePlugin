@@ -33,6 +33,11 @@ public class APHintGame
         }
     }
 
+    public void Disconnect()
+    {
+        APSession?.Socket.DisconnectAsync().Wait();
+    }
+
     public void Hint()
     {
         if (APSession == null)

@@ -11,7 +11,7 @@ public class ConfigWindow : Window, IDisposable
 
     private readonly APHintGame apHintGame;
 
-    private string result = string.Empty;
+    private string status = string.Empty;
 
     public ConfigWindow(Plugin plugin) : base("APHintGamePlugin Config###APHintGamePlugin config")
     {
@@ -59,13 +59,24 @@ public class ConfigWindow : Window, IDisposable
             try
             {
                 apHintGame.Connect(configuration.ServerURL, configuration.SlotName, configuration.Password);
-                result = "Connected!";
+                status = "Connected!";
             }
             catch (Exception exc)
             {
-                result = "Failed to connect to Archipelago: " + exc.Message;
+                status = "Failed to connect to Archipelago: " + exc.Message;
             }
         }
-        ImGui.TextUnformatted(result);
+        if (ImGui.Button("Disconnect"))
+        {
+            try
+            {
+                apHintGame.Disconnect();
+            }
+            catch (Exception exc)
+            {
+                status = "Disconnect failed: " + exc.Message;
+            }
+        }
+        ImGui.TextUnformatted(status);
     }
 }

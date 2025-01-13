@@ -71,6 +71,7 @@ public sealed class Plugin : IDalamudPlugin
 
         DutyState.DutyCompleted -= OnHint;
         APHintGame.OnMessageReceived -= OnReceiveAPMessage;
+        APHintGame.Disconnect();
     }
 
     private void OnCommand(string command, string args)
